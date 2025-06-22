@@ -18,6 +18,7 @@ import br.com.habittracker.mobile.viewmodel.HabitListViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private HabitListViewModel habitListViewModel;
+    private HabitListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +35,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        final HabitListAdapter adapter = new HabitListAdapter();
+        adapter = new HabitListAdapter();
         recyclerView.setAdapter(adapter);
 
         habitListViewModel = new ViewModelProvider(this).get(HabitListViewModel.class);
-        habitListViewModel.getAllHabits().observe(this, habits -> {
-            if (habits != null) {
-                adapter.setHabits(habits);
-            }
-        });
 
         findViewById(R.id.fab_add_habit).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddHabitActivity.class);
@@ -54,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Recarrega os dados toda vez que a activity fica visível
+        habitListViewModel.refreshHabits();
         habitListViewModel.getAllHabits().observe(this, habits -> {
             if (habits != null) {
-                // Atualize o adapter
+                adapter.setHabits(habits);
             }
         });
     }

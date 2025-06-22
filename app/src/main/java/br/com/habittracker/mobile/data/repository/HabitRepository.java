@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import br.com.habittracker.mobile.data.model.HabitRequest;
 import br.com.habittracker.mobile.data.model.HabitResponse;
 import br.com.habittracker.mobile.network.ApiClient;
 import br.com.habittracker.mobile.network.HabitApiService;
@@ -37,5 +38,19 @@ public class HabitRepository {
             }
         });
         return data;
+    }
+
+    public void createHabit(HabitRequest habitRequest, MutableLiveData<Boolean> success) {
+        apiService.createHabit(habitRequest).enqueue(new Callback<HabitResponse>() {
+            @Override
+            public void onResponse(Call<HabitResponse> call, Response<HabitResponse> response) {
+                success.setValue(response.isSuccessful());
+            }
+
+            @Override
+            public void onFailure(Call<HabitResponse> call, Throwable t) {
+                success.setValue(false);
+            }
+        });
     }
 }

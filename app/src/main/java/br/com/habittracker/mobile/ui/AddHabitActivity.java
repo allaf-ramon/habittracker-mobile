@@ -1,6 +1,7 @@
 package br.com.habittracker.mobile.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,9 +26,23 @@ public class AddHabitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_habit);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+
+        View mainView = findViewById(R.id.main);
+        // Guarda o padding inicial definido no XML
+        final int initialPaddingLeft = mainView.getPaddingLeft();
+        final int initialPaddingTop = mainView.getPaddingTop();
+        final int initialPaddingRight = mainView.getPaddingRight();
+        final int initialPaddingBottom = mainView.getPaddingBottom();
+
+        ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            // Soma o padding inicial com o padding das barras do sistema
+            v.setPadding(
+                    systemBars.left + initialPaddingLeft,
+                    systemBars.top + initialPaddingTop,
+                    systemBars.right + initialPaddingRight,
+                    systemBars.bottom + initialPaddingBottom
+            );
             return insets;
         });
 

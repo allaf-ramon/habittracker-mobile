@@ -20,4 +20,8 @@ public class HabitListViewModel extends ViewModel {
     public LiveData<List<HabitResponse>> getAllHabits() {
         return allHabits;
     }
+
+    public void refreshHabits() {
+        allHabits = repository.getAllHabits();
+    }
 }

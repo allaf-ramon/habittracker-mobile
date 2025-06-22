@@ -49,4 +49,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Recarrega os dados toda vez que a activity fica visível
+        habitListViewModel.getAllHabits().observe(this, habits -> {
+            if (habits != null) {
+                // Atualize o adapter
+            }
+        });
+    }
 }

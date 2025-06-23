@@ -12,6 +12,9 @@ public class HabitResponse {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("completedToday")
+    private boolean completedToday;
+
     public Long getId() {
         return id;
     }
@@ -22,5 +25,9 @@ public class HabitResponse {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isCompletedToday() {
+        return completedToday;
     }
 }

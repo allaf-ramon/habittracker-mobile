@@ -1,5 +1,9 @@
 package br.com.habittracker.mobile.data.repository;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -33,7 +37,7 @@ public class HabitRepository {
 
             @Override
             public void onFailure(Call<List<HabitResponse>> call, Throwable t) {
-                // Em um app real, trataríamos o erro aqui (ex: log, mensagem ao usuário)
+                Log.e(TAG, "Falha ao buscar hábitos", t);
                 data.setValue(null);
             }
         });
@@ -50,6 +54,34 @@ public class HabitRepository {
             @Override
             public void onFailure(Call<HabitResponse> call, Throwable t) {
                 success.setValue(false);
+            }
+        });
+    }
+
+    public void markAsCompleted(Long habitId, String date, MutableLiveData<Boolean> success) {
+        apiService.markAsCompleted(habitId, date).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                success.postValue(response.isSuccessful());
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Falha ao marcar como concluído", t);
+                success.postValue(false);
+            }
+        });
+    }
+
+    public void markAsNotCompleted(Long habitId, String date, MutableLiveData<Boolean> success) {
+        apiService.markAsNotCompleted(habitId, date).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                success.postValue(response.isSuccessful());
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Falha ao desmarcar como concluído", t);
+                success.postValue(false);
             }
         });
     }

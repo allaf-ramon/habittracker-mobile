@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.habittracker.mobile.data.model.HabitRequest;
 import br.com.habittracker.mobile.data.model.HabitResponse;
+import br.com.habittracker.mobile.data.model.HabitStatsResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -23,4 +24,10 @@ public interface HabitApiService {
 
     @DELETE("v1/habits/{habitId}/completions/{date}")
     Call<Void> markAsNotCompleted(@Path("habitId") Long habitId, @Path("date") String date);
+
+    @GET("v1/habits/{habitId}")
+    Call<HabitResponse> getHabitById(@Path("habitId") Long habitId);
+
+    @GET("v1/habits/{habitId}/stats")
+    Call<HabitStatsResponse> getHabitStats(@Path("habitId") Long habitId);
 }

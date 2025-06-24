@@ -19,9 +19,18 @@ import br.com.habittracker.mobile.viewmodel.HabitListViewModel;
 public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.HabitViewHolder> {
     private List<HabitResponse> habits = new ArrayList<>();
     private final HabitListViewModel viewModel;
+    private OnHabitClickListener clickListener;
 
     public HabitListAdapter(HabitListViewModel viewModel) {
         this.viewModel = viewModel;
+    }
+
+    public interface OnHabitClickListener {
+        void onHabitClick(HabitResponse habit);
+    }
+
+    public void setOnHabitClickListener(OnHabitClickListener listener) {
+        this.clickListener = listener;
     }
 
     @NonNull
@@ -42,6 +51,12 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.Habi
 
         holder.checkBoxCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> {
             viewModel.toggleCompletion(currentHabit);
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onHabitClick(currentHabit);
+            }
         });
     }
 

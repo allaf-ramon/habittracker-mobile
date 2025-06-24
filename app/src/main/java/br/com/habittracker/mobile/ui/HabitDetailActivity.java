@@ -15,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import br.com.habittracker.mobile.R;
 import br.com.habittracker.mobile.viewmodel.HabitDetailViewModel;
 
@@ -34,6 +36,13 @@ public class HabitDetailActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_detail);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         textName = findViewById(R.id.textview_detail_habit_name);
         textDescription = findViewById(R.id.textview_detail_habit_description);
@@ -78,6 +87,10 @@ public class HabitDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // Volta para a tela anterior
+            return true;
+        }
         if (item.getItemId() == R.id.action_edit_habit) {
             Intent intent = new Intent(this, AddEditHabitActivity.class);
             // Passa o ID para a activity saber que está em modo de edição

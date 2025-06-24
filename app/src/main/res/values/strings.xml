@@ -10,4 +10,6 @@
     <string name="cancel">Cancelar</string>
     <string name="delete">Excluir</string>
     <string name="current_streak">Sequência Atual</string>
+    <string name="longest_streak">Maior Sequência</string>
+    <string name="longest_streak_icon_description">Ícone de troféu para a maior sequência</string>
 </resources>

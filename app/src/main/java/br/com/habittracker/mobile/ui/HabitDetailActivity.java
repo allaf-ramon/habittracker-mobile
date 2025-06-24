@@ -24,7 +24,7 @@ import br.com.habittracker.mobile.viewmodel.HabitDetailViewModel;
 public class HabitDetailActivity extends AppCompatActivity {
     public static final String EXTRA_HABIT_ID = "br.com.habittracker.mobile.HABIT_ID";
     private HabitDetailViewModel viewModel;
-    private TextView textName, textDescription, textStreak;
+    private TextView textName, textDescription, textStreak, textLongestStreak;
     private long habitId;
 
     @Override
@@ -48,6 +48,7 @@ public class HabitDetailActivity extends AppCompatActivity {
         textName = findViewById(R.id.textview_detail_habit_name);
         textDescription = findViewById(R.id.textview_detail_habit_description);
         textStreak = findViewById(R.id.textview_detail_current_streak);
+        textLongestStreak = findViewById(R.id.textview_detail_longest_streak);
 
         this.habitId = getIntent().getLongExtra(EXTRA_HABIT_ID, -1);
         if (this.habitId == -1) {
@@ -83,6 +84,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             viewModel.getHabitStats(this.habitId).observe(this, stats -> {
                 if (stats != null) {
                     textStreak.setText(String.valueOf(stats.getCurrentStreak()));
+                    textLongestStreak.setText(String.valueOf(stats.getLongestStreak()));
                 }
             });
         }

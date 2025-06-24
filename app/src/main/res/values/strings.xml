@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Rastreador de Hábitos</string>
     <string name="add_habit">Adicionar Hábito</string>
+    <string name="edit_habit">Editar Hábito</string>
     <string name="habit_name">Nome do Hábito</string>
     <string name="habit_description_optional">Descrição do Hábito (opcional)</string>
     <string name="save">Salvar</string>

@@ -121,4 +121,18 @@ public class HabitRepository {
         });
         return data;
     }
+
+    public void updateHabit(Long habitId, HabitRequest request, MutableLiveData<Boolean> success) {
+        apiService.updateHabit(habitId, request).enqueue(new Callback<HabitResponse>() {
+            @Override
+            public void onResponse(Call<HabitResponse> call, Response<HabitResponse> response) {
+                success.setValue(response.isSuccessful());
+            }
+            @Override
+            public void onFailure(Call<HabitResponse> call, Throwable t) {
+                Log.e(TAG, "Falha ao atualizar hábito", t);
+                success.setValue(false);
+            }
+        });
+    }
 }

@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface HabitApiService {
@@ -30,4 +31,7 @@ public interface HabitApiService {
 
     @GET("v1/habits/{habitId}/stats")
     Call<HabitStatsResponse> getHabitStats(@Path("habitId") Long habitId);
+
+    @PUT("v1/habits/{habitId}")
+    Call<HabitResponse> updateHabit(@Path("habitId") Long habitId, @Body HabitRequest habitRequest);
 }

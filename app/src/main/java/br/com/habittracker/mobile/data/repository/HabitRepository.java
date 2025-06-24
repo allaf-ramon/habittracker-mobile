@@ -1,7 +1,5 @@
 package br.com.habittracker.mobile.data.repository;
 
-import static android.content.ContentValues.TAG;
-
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -11,6 +9,7 @@ import java.util.List;
 
 import br.com.habittracker.mobile.data.model.HabitRequest;
 import br.com.habittracker.mobile.data.model.HabitResponse;
+import br.com.habittracker.mobile.data.model.HabitStatsResponse;
 import br.com.habittracker.mobile.network.ApiClient;
 import br.com.habittracker.mobile.network.HabitApiService;
 import retrofit2.Call;
@@ -18,7 +17,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HabitRepository {
-    private HabitApiService apiService;
+    private final HabitApiService apiService;
+    private static final String TAG = "HabitRepository";
 
     public HabitRepository() {
         apiService = ApiClient.getClient().create(HabitApiService.class);
@@ -84,5 +84,41 @@ public class HabitRepository {
                 success.postValue(false);
             }
         });
+    }
+
+    public LiveData<HabitResponse> getHabitById(Long habitId) {
+        MutableLiveData<HabitResponse> data = new MutableLiveData<>();
+        apiService.getHabitById(habitId).enqueue(new Callback<HabitResponse>() {
+            @Override
+            public void onResponse(Call<HabitResponse> call, Response<HabitResponse> response) {
+                if (response.isSuccessful()) {
+                    data.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<HabitResponse> call, Throwable t) {
+                Log.e(TAG, "Falha ao buscar hábito por ID", t);
+                data.setValue(null);
+            }
+        });
+        return data;
+    }
+
+    public LiveData<HabitStatsResponse> getHabitStats(Long habitId) {
+        MutableLiveData<HabitStatsResponse> data = new MutableLiveData<>();
+        apiService.getHabitStats(habitId).enqueue(new Callback<HabitStatsResponse>() {
+            @Override
+            public void onResponse(Call<HabitStatsResponse> call, Response<HabitStatsResponse> response) {
+                if (response.isSuccessful()) {
+                    data.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<HabitStatsResponse> call, Throwable t) {
+                Log.e(TAG, "Falha ao buscar estatísticas do hábito", t);
+                data.setValue(null);
+            }
+        });
+        return data;
     }
 }

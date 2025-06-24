@@ -14,10 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import br.com.habittracker.mobile.R;
-import br.com.habittracker.mobile.viewmodel.AddHabitViewModel;
+import br.com.habittracker.mobile.viewmodel.AddEditHabitViewModel;
 
-public class AddHabitActivity extends AppCompatActivity {
-    private AddHabitViewModel addHabitViewModel;
+public class AddEditHabitActivity extends AppCompatActivity {
+    private AddEditHabitViewModel addEditHabitViewModel;
     private EditText editTextName;
     private EditText editTextDescription;
 
@@ -25,7 +25,7 @@ public class AddHabitActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_habit);
+        setContentView(R.layout.activity_add_edit_habit);
 
         View mainView = findViewById(R.id.main);
         // Guarda o padding inicial definido no XML
@@ -50,9 +50,9 @@ public class AddHabitActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.edit_text_habit_description);
         Button buttonSave = findViewById(R.id.button_save_habit);
 
-        addHabitViewModel = new ViewModelProvider(this).get(AddHabitViewModel.class);
+        addEditHabitViewModel = new ViewModelProvider(this).get(AddEditHabitViewModel.class);
 
-        addHabitViewModel.createSuccess.observe(this, success -> {
+        addEditHabitViewModel.createSuccess.observe(this, success -> {
             if (success) {
                 Toast.makeText(this, "Hábito salvo com sucesso!", Toast.LENGTH_SHORT).show();
                 finish(); // Fecha a tela e volta para a lista
@@ -70,7 +70,7 @@ public class AddHabitActivity extends AppCompatActivity {
                 return;
             }
 
-            addHabitViewModel.createHabit(name, description);
+            addEditHabitViewModel.createHabit(name, description);
         });
     }
 }

@@ -19,7 +19,7 @@
             android:name=".ui.HabitDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AddHabitActivity"
+            android:name=".ui.AddEditHabitActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

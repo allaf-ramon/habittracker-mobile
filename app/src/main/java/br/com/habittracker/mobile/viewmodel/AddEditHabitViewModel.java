@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel;
 import br.com.habittracker.mobile.data.model.HabitRequest;
 import br.com.habittracker.mobile.data.repository.HabitRepository;
 
-public class AddHabitViewModel extends ViewModel {
+public class AddEditHabitViewModel extends ViewModel {
     private HabitRepository repository;
     public MutableLiveData<Boolean> createSuccess = new MutableLiveData<>();
 
-    public AddHabitViewModel() {
+    public AddEditHabitViewModel() {
         this.repository = new HabitRepository();
     }
 

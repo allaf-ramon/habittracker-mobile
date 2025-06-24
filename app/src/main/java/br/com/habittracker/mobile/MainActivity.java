@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import br.com.habittracker.mobile.ui.AddHabitActivity;
+import br.com.habittracker.mobile.ui.AddEditHabitActivity;
 import br.com.habittracker.mobile.ui.HabitDetailActivity;
 import br.com.habittracker.mobile.ui.habit_list.HabitListAdapter;
 import br.com.habittracker.mobile.viewmodel.HabitListViewModel;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.fab_add_habit).setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, AddHabitActivity.class);
+            Intent intent = new Intent(MainActivity.this, AddEditHabitActivity.class);
             startActivity(intent);
         });
     }

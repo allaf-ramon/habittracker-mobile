@@ -4,4 +4,6 @@
     <string name="habit_name">Nome do Hábito</string>
     <string name="habit_description_optional">Descrição do Hábito (opcional)</string>
     <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="current_streak">Sequência Atual</string>
 </resources>

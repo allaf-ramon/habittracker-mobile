@@ -34,4 +34,7 @@ public interface HabitApiService {
 
     @PUT("v1/habits/{habitId}")
     Call<HabitResponse> updateHabit(@Path("habitId") Long habitId, @Body HabitRequest habitRequest);
+
+    @DELETE("v1/habits/{habitId}")
+    Call<Void> deleteHabit(@Path("habitId") Long habitId);
 }

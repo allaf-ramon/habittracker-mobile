@@ -135,4 +135,18 @@ public class HabitRepository {
             }
         });
     }
+
+    public void deleteHabit(Long habitId, MutableLiveData<Boolean> success) {
+        apiService.deleteHabit(habitId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                success.setValue(response.isSuccessful());
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Falha ao deletar hábito", t);
+                success.setValue(false);
+            }
+        });
+    }
 }

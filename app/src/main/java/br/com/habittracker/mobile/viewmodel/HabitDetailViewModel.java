@@ -1,6 +1,7 @@
 package br.com.habittracker.mobile.viewmodel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import br.com.habittracker.mobile.data.model.HabitResponse;
@@ -9,6 +10,7 @@ import br.com.habittracker.mobile.data.repository.HabitRepository;
 
 public class HabitDetailViewModel extends ViewModel {
     private final HabitRepository repository;
+    public final MutableLiveData<Boolean> deleteSuccess = new MutableLiveData<>();
 
     public HabitDetailViewModel() {
         this.repository = new HabitRepository();
@@ -35,5 +37,9 @@ public class HabitDetailViewModel extends ViewModel {
     public void refreshData(long habitId) {
         // A lógica de recarga é acionada na Activity ao re-observar o LiveData.
         // Este método serve como um ponto de entrada explícito se necessário no futuro.
+    }
+
+    public void deleteHabit(Long habitId) {
+        repository.deleteHabit(habitId, deleteSuccess);
     }
 }

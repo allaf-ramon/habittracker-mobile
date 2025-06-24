@@ -58,6 +58,14 @@ public class HabitDetailActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(HabitDetailViewModel.class);
 
+        viewModel.deleteSuccess.observe(this, success -> {
+            if (success) {
+                Toast.makeText(this, "Hábito excluído com sucesso!", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Erro ao excluir o hábito.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

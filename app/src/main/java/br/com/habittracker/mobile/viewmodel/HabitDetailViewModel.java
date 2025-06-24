@@ -31,4 +31,9 @@ public class HabitDetailViewModel extends ViewModel {
     public LiveData<HabitStatsResponse> getHabitStats(Long habitId) {
         return repository.getHabitStats(habitId);
     }
+
+    public void refreshData(long habitId) {
+        // A lógica de recarga é acionada na Activity ao re-observar o LiveData.
+        // Este método serve como um ponto de entrada explícito se necessário no futuro.
+    }
 }

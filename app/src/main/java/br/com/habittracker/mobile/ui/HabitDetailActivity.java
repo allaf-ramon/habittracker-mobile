@@ -48,20 +48,26 @@ public class HabitDetailActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(HabitDetailViewModel.class);
 
-        // Observa e atualiza os detalhes do hábito
-        viewModel.getHabitDetails(this.habitId).observe(this, habit -> {
-            if (habit != null) {
-                textName.setText(habit.getName());
-                textDescription.setText(habit.getDescription());
-            }
-        });
+    }
 
-        // Observa e atualiza as estatísticas
-        viewModel.getHabitStats(this.habitId).observe(this, stats -> {
-            if (stats != null) {
-                textStreak.setText(String.valueOf(stats.getCurrentStreak()));
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Recarrega os dados toda vez que a activity fica visível
+        if (habitId != -1) {
+            viewModel.getHabitDetails(this.habitId).observe(this, habit -> {
+                if (habit != null) {
+                    textName.setText(habit.getName());
+                    textDescription.setText(habit.getDescription());
+                }
+            });
+
+            viewModel.getHabitStats(this.habitId).observe(this, stats -> {
+                if (stats != null) {
+                    textStreak.setText(String.valueOf(stats.getCurrentStreak()));
+                }
+            });
+        }
     }
 
     @Override

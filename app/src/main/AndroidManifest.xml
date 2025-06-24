@@ -16,6 +16,9 @@
         android:theme="@style/Theme.RastreadorDeHábitos"
         tools:targetApi="31">
         <activity
+            android:name=".ui.HabitDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.AddHabitActivity"
             android:exported="false" />
         <activity

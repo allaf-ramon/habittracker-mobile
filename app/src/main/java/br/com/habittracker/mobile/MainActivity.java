@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import br.com.habittracker.mobile.ui.AddHabitActivity;
+import br.com.habittracker.mobile.ui.HabitDetailActivity;
 import br.com.habittracker.mobile.ui.habit_list.HabitListAdapter;
 import br.com.habittracker.mobile.viewmodel.HabitListViewModel;
 
@@ -37,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final HabitListAdapter adapter = new HabitListAdapter(habitListViewModel);
         recyclerView.setAdapter(adapter);
+
+        // Seta o listener no adapter
+        adapter.setOnHabitClickListener(habit -> {
+            Intent intent = new Intent(MainActivity.this, HabitDetailActivity.class);
+            intent.putExtra(HabitDetailActivity.EXTRA_HABIT_ID, habit.getId());
+            startActivity(intent);
+        });
 
         // Observa a lista de hábitos e atualiza o adapter
         habitListViewModel.getAllHabits().observe(this, habits -> {

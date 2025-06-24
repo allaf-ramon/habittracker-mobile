@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -87,17 +88,35 @@ public class HabitDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+
+        if (itemId == android.R.id.home) {
             finish(); // Volta para a tela anterior
             return true;
         }
-        if (item.getItemId() == R.id.action_edit_habit) {
+
+        if (itemId == R.id.action_edit_habit) {
             Intent intent = new Intent(this, AddEditHabitActivity.class);
             // Passa o ID para a activity saber que está em modo de edição
             intent.putExtra(EXTRA_HABIT_ID, this.habitId);
             startActivity(intent);
             return true;
+        } else if (itemId == R.id.action_delete_habit) {
+            showDeleteConfirmationDialog();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.delete_habit)
+                .setMessage(R.string.delete_habit_confirmation)
+                .setPositiveButton(R.string.delete, (dialog, which) -> {
+                    // Chama o método do ViewModel para excluir
+                    viewModel.deleteHabit(habitId);
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 }

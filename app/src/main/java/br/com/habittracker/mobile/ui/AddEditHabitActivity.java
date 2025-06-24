@@ -17,9 +17,11 @@ import br.com.habittracker.mobile.R;
 import br.com.habittracker.mobile.viewmodel.AddEditHabitViewModel;
 
 public class AddEditHabitActivity extends AppCompatActivity {
+    public static final String EXTRA_HABIT_ID = "br.com.habittracker.mobile.HABIT_ID";
     private AddEditHabitViewModel addEditHabitViewModel;
     private EditText editTextName;
     private EditText editTextDescription;
+    private Long currentHabitId = null; // null significa modo de criação
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +54,26 @@ public class AddEditHabitActivity extends AppCompatActivity {
 
         addEditHabitViewModel = new ViewModelProvider(this).get(AddEditHabitViewModel.class);
 
-        addEditHabitViewModel.createSuccess.observe(this, success -> {
+        if (getIntent().hasExtra(EXTRA_HABIT_ID)) {
+            currentHabitId = getIntent().getLongExtra(EXTRA_HABIT_ID, -1);
+            setTitle(R.string.edit_habit);
+
+            addEditHabitViewModel.getHabitById(currentHabitId).observe(this, habit -> {
+                if (habit != null) {
+                    editTextName.setText(habit.getName());
+                    editTextDescription.setText(habit.getDescription());
+                }
+            });
+        } else {
+            setTitle(R.string.add_habit);
+        }
+
+        addEditHabitViewModel.saveSuccess.observe(this, success -> {
             if (success) {
-                Toast.makeText(this, "Hábito salvo com sucesso!", Toast.LENGTH_SHORT).show();
-                finish(); // Fecha a tela e volta para a lista
+                Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                finish(); // Volta para a tela anterior
             } else {
-                Toast.makeText(this, "Erro ao salvar hábito.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erro ao salvar.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,12 +81,12 @@ public class AddEditHabitActivity extends AppCompatActivity {
             String name = editTextName.getText().toString();
             String description = editTextDescription.getText().toString();
 
-            if (name.isEmpty()) {
+            if (name.trim().isEmpty()) {
                 editTextName.setError("O nome é obrigatório");
                 return;
             }
 
-            addEditHabitViewModel.createHabit(name, description);
+            addEditHabitViewModel.saveHabit(currentHabitId, name, description);
         });
     }
 }

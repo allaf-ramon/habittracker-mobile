@@ -9,11 +9,18 @@ public class HabitStatsResponse {
     @SerializedName("longestStreak")
     private int longestStreak;
 
+    @SerializedName("successRate")
+    private double successRate;
+
     public int getCurrentStreak() {
         return currentStreak;
     }
 
     public int getLongestStreak() {
         return longestStreak;
+    }
+
+    public double getSuccessRate() {
+        return successRate;
     }
 }

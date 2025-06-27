@@ -13,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import br.com.habittracker.mobile.R;
 import br.com.habittracker.mobile.viewmodel.AddEditHabitViewModel;
 
@@ -21,6 +23,7 @@ public class AddEditHabitActivity extends AppCompatActivity {
     private AddEditHabitViewModel addEditHabitViewModel;
     private EditText editTextName;
     private EditText editTextDescription;
+    private MaterialToolbar toolbar;
     private Long currentHabitId = null; // null significa modo de criação
 
     @Override
@@ -48,15 +51,22 @@ public class AddEditHabitActivity extends AppCompatActivity {
             return insets;
         });
 
+        toolbar = findViewById(R.id.toolbar);
         editTextName = findViewById(R.id.edit_text_habit_name);
         editTextDescription = findViewById(R.id.edit_text_habit_description);
         Button buttonSave = findViewById(R.id.button_save_habit);
+
+        // Configura a Toolbar como a ActionBar da atividade
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false); // Desativa o título padrão
+        }
 
         addEditHabitViewModel = new ViewModelProvider(this).get(AddEditHabitViewModel.class);
 
         if (getIntent().hasExtra(EXTRA_HABIT_ID)) {
             currentHabitId = getIntent().getLongExtra(EXTRA_HABIT_ID, -1);
-            setTitle(R.string.edit_habit);
+            toolbar.setTitle(R.string.edit_habit);
 
             addEditHabitViewModel.getHabitById(currentHabitId).observe(this, habit -> {
                 if (habit != null) {
@@ -65,8 +75,11 @@ public class AddEditHabitActivity extends AppCompatActivity {
                 }
             });
         } else {
-            setTitle(R.string.add_habit);
+            toolbar.setTitle(R.string.add_habit);
         }
+
+        // Listener do botão de voltar da Toolbar
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         addEditHabitViewModel.saveSuccess.observe(this, success -> {
             if (success) {

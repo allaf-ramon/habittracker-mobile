@@ -1,15 +1,36 @@
 <resources>
     <string name="app_name">Rastreador de Hábitos</string>
+
+    <!-- Tela Principal -->
+    <string name="header_title">Habit Tracker</string>
+    <string name="due_to_label">Para Hoje:</string>
+
+    <!-- Títulos de Tela -->
     <string name="add_habit">Adicionar Hábito</string>
     <string name="edit_habit">Editar Hábito</string>
-    <string name="delete_habit">Excluir Hábito</string>
-    <string name="delete_habit_confirmation">Tem certeza de que deseja excluir este hábito?</string>
-    <string name="habit_name">Nome do Hábito</string>
-    <string name="habit_description_optional">Descrição do Hábito (opcional)</string>
+
+    <!-- Ações -->
     <string name="save">Salvar</string>
     <string name="cancel">Cancelar</string>
     <string name="delete">Excluir</string>
+    <string name="delete_habit">Excluir Hábito</string>
+
+    <!-- Labels e Hints -->
+    <string name="label_name">NOME</string>
+    <string name="label_description">DESCRIÇÃO</string>
+    <string name="habit_name">Nome do Hábito</string>
+    <string name="habit_description_optional">Descrição (opcional)</string>
+
+    <!-- Diálogos e Mensagens -->
+    <string name="delete_habit_title">Excluir Hábito</string>
+    <string name="delete_habit_confirmation">Tem certeza de que deseja excluir este hábito?</string>
+    <string name="error_name_required">O nome é obrigatório</string>
+    <string name="toast_save_success">Hábito salvo com sucesso!</string>
+    <string name="toast_save_error">Erro ao salvar o hábito.</string>
+
+    <!-- Estatísticas e Descrições de Acessibilidade -->
     <string name="current_streak">Sequência Atual</string>
     <string name="longest_streak">Maior Sequência</string>
     <string name="longest_streak_icon_description">Ícone de troféu para a maior sequência</string>
+    <string name="success_rate">Taxa de Sucesso</string>
 </resources>

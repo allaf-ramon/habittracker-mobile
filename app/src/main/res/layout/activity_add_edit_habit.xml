@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="NOME"
+        android:text="@string/label_name"
         android:textColor="@color/text_secondary_gray"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -63,6 +63,7 @@
             android:id="@+id/edit_text_habit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/habit_name"
             android:inputType="textCapSentences"
             android:textColor="@color/text_primary_dark" />
 
@@ -74,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="DESCRIÇÃO"
+        android:text="@string/label_description"
         android:textColor="@color/text_secondary_gray"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -106,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
+            android:hint="@string/habit_description_optional"
             android:inputType="textMultiLine|textCapSentences"
             android:lines="4"
             android:textColor="@color/text_primary_dark" />
@@ -122,7 +124,7 @@
         android:backgroundTint="@color/primary_button_blue"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:text="Guardar"
+        android:text="@string/save"
         android:textAllCaps="false"
         android:textSize="16sp"
         app:cornerRadius="12dp"

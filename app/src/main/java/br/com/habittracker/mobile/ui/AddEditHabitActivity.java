@@ -83,10 +83,10 @@ public class AddEditHabitActivity extends AppCompatActivity {
 
         addEditHabitViewModel.saveSuccess.observe(this, success -> {
             if (success) {
-                Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
-                finish(); // Volta para a tela anterior
+                Toast.makeText(this, getString(R.string.toast_save_success), Toast.LENGTH_SHORT).show();
+                finish();
             } else {
-                Toast.makeText(this, "Erro ao salvar.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.toast_save_error), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -95,7 +95,7 @@ public class AddEditHabitActivity extends AppCompatActivity {
             String description = editTextDescription.getText().toString();
 
             if (name.trim().isEmpty()) {
-                editTextName.setError("O nome é obrigatório");
+                editTextName.setError(getString(R.string.error_name_required));
                 return;
             }
 

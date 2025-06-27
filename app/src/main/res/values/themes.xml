@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.RastreadorDeHábitos" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Cores Primárias -->
+        <item name="colorPrimary">@color/primary_button_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Cor de Fundo -->
+        <item name="android:colorBackground">@color/background_light_gray</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+
+        <!-- Cor da Barra de Status -->
+        <item name="android:statusBarColor">@color/background_light_gray</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.RastreadorDeHábitos" parent="Base.Theme.RastreadorDeHábitos" />

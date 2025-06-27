@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        // Lida com os paddings do sistema para o EdgeToEdge
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.fab_add_habit).setOnClickListener(view -> {
+        findViewById(R.id.button_add_habit).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddEditHabitActivity.class);
             startActivity(intent);
         });

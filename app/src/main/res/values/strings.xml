@@ -33,4 +33,13 @@
     <string name="longest_streak">Maior Sequência</string>
     <string name="longest_streak_icon_description">Ícone de troféu para a maior sequência</string>
     <string name="success_rate">Taxa de Sucesso</string>
+
+    <!-- Tela de Detalhes -->
+    <string name="stat_days_format">%d dias</string>
+    <string name="stat_percent_format">%.0f%%</string>
+
+    <!-- Mensagens de Erro e Sucesso -->
+    <string name="error_habit_id_not_found">Erro: ID do Hábito não encontrado</string>
+    <string name="toast_delete_success">Hábito excluído com sucesso!</string>
+    <string name="toast_delete_error">Erro ao excluir o hábito.</string>
 </resources>
